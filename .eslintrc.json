@@ -2,7 +2,8 @@
   "parser": "@typescript-eslint/parser",
   "plugins": [
     "@typescript-eslint",
-    "cypress"
+    "cypress",
+    "prettier"
   ],
   "settings": {
     "react": {
@@ -23,6 +24,7 @@
   },
   "rules": {
     "react/react-in-jsx-scope": 0,
-    "@typescript-eslint/no-explicit-any": 2
+    "@typescript-eslint/no-explicit-any": 2,
+    "prettier/prettier": "error"
   }
 }

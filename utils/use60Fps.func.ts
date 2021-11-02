@@ -1,4 +1,6 @@
-export default function use60Fps(callback: (timestamp: number, frame: number) => void) {
+export default function use60Fps(
+  callback: (timestamp: number, frame: number) => void
+) {
   const delay = 1000 / 60;
   let previousTimeStamp: number | null = null;
   let frame = -1;
@@ -7,7 +9,9 @@ export default function use60Fps(callback: (timestamp: number, frame: number) =>
   let frameID = requestAnimationFrame(function loop(timestamp: number): void {
     if (!paused) {
       if (previousTimeStamp == null) previousTimeStamp = timestamp;
-      const calculatedFrame = Math.floor((timestamp - previousTimeStamp) / delay);
+      const calculatedFrame = Math.floor(
+        (timestamp - previousTimeStamp) / delay
+      );
 
       if (calculatedFrame > frame) {
         frame = calculatedFrame;
@@ -17,37 +21,39 @@ export default function use60Fps(callback: (timestamp: number, frame: number) =>
 
     frameID = requestAnimationFrame(loop);
   });
-  
+
   const monad = {
     stop() {
       cancelAnimationFrame(frameID);
-      return monad
+      return monad;
     },
     resume() {
       paused = false;
-      return monad
+      return monad;
     },
     pause() {
-      paused = true
-      return monad
+      paused = true;
+      return monad;
     },
     useAnimationFrameID<t = unknown>(getter: (frameid: number) => t) {
       getter(frameID);
-      return monad
+      return monad;
     },
     useFrame<t = unknown>(getter: (frame: number) => t) {
       getter(frame);
-      return monad
+      return monad;
     },
     useDelay<t = unknown>(getter: (delay: number) => t) {
       getter(delay);
-      return monad
+      return monad;
     },
-    usePreviousTimeStamp<t = unknown>(getter: (previousTimeStamp: number) => t) {
+    usePreviousTimeStamp<t = unknown>(
+      getter: (previousTimeStamp: number) => t
+    ) {
       getter(previousTimeStamp);
-      return monad
+      return monad;
     },
-  }
+  };
 
   return monad;
 }

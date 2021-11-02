@@ -1,5 +1,7 @@
 import initRenderer from "./initRenderer.func";
+import Grid from "./types/GridList/GridList.class";
 import State from "./types/State.type";
+import Tile from "./types/Tile.enum";
 import update from "./update.func";
 import use60Fps from "./use60Fps.func";
 
@@ -10,25 +12,19 @@ import use60Fps from "./use60Fps.func";
  * @returns the cleapup callback ie: () => void
  */
 export default function createGame(root: HTMLDivElement) {
-  const render = initRenderer(root)
+  const render = initRenderer(root);
 
   let state: State = {
-    apples: [[0, 0]],
-    size: 9,
     root: root,
-    aspect: {
-      offsetLeft: 0,
-      offsetTop: 0,
-      ratio: 0,
-    },
+    map: new Grid<Tile>(256, 16, Tile.EMPTY),
   };
 
   const controller = use60Fps(() => {
-    state = update(state)
-    render(state)
+    state = update(state);
+    render(state);
   });
 
   return function cleanup() {
     controller.stop();
-  }
+  };
 }

@@ -32,17 +32,16 @@ export default function initRenderer(
     aspect = getAspectRatio(canvas);
   });
 
+  const colors = ["#ABD857", "#A5D352"];
+
   return function render(state: State) {
     if (root) {
-      ctx.fillStyle = "red";
-      // trying to center the tiles
+      ctx.fillStyle = "#588A38";
+      ctx.fillRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
 
-      const step = (95 / state.map.length) * aspect;
-      const padding = step * 0.05;
-      const size = step - padding;
-      const border = (5 / state.map.length) * aspect;
-
-      const colors = ["#0b911f", "#0eb728"];
+      const tileSize = Math.ceil((90 / state.map.length) * aspect);
+      const xOffset = 5 * aspect;
+      const yOffset = Math.ceil(2.5 * aspect);
 
       state.map.items.forEach((item, index): void => {
         if (item.data === Tile.EMPTY) {
@@ -53,10 +52,10 @@ export default function initRenderer(
           }
 
           ctx.fillRect(
-            border + (step * item.column + padding / 2),
-            border + (step * item.row + padding / 2),
-            size,
-            size
+            xOffset + tileSize * item.column,
+            yOffset + tileSize * item.row,
+            tileSize,
+            tileSize
           );
 
           return;
@@ -71,10 +70,10 @@ export default function initRenderer(
         }
 
         ctx.fillRect(
-          size * item.column + padding,
-          size * item.row + padding,
-          size,
-          size
+          xOffset + tileSize * item.column,
+          yOffset + tileSize * item.row,
+          tileSize,
+          tileSize
         );
       });
     }

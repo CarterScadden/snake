@@ -19,6 +19,17 @@ export default function createGame(root: HTMLDivElement) {
     map: new Grid<Tile>(256, 16, Tile.EMPTY),
   };
 
+  const getRandomIndex = getRandomIndexGetterFromLength(state.map.items.length);
+
+  state.map.items[getRandomIndex()].data = Tile.APPLE;
+
+  let index = getRandomIndex();
+  while (state.map.items[index].data === Tile.APPLE) {
+    index = getRandomIndex();
+  }
+
+  state.map.items[index].data = Tile.SNAKE_HEAD;
+
   const controller = use60Fps(() => {
     state = update(state);
     render(state);
@@ -27,4 +38,8 @@ export default function createGame(root: HTMLDivElement) {
   return function cleanup() {
     controller.stop();
   };
+}
+
+function getRandomIndexGetterFromLength(length: number) {
+  return () => Math.floor(Math.random() * length);
 }

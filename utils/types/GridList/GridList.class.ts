@@ -30,7 +30,11 @@ export default class Grid<T> {
         column: col,
         data: defaultData,
       }))
-      .flat();
+      .flat()
+      .map((obj, index) => ({
+        ...obj,
+        index,
+      }));
 
     for (let i = 0; i < items.length; i++) {
       items[i].left = items[i - 1] || null;

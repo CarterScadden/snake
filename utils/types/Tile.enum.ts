@@ -1,7 +1,7 @@
 enum Tile {
   EMPTY,
   APPLE,
-  SNAKE_HEAD,
+  SNAKE,
   DEATH_TILE,
 }
 

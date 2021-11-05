@@ -63,7 +63,7 @@ export default function initRenderer(
 
         if (item.data === Tile.APPLE) {
           ctx.fillStyle = "red";
-        } else if (item.data === Tile.SNAKE_HEAD) {
+        } else if (item.data === Tile.SNAKE) {
           ctx.fillStyle = "#1088c9";
         } else if (item.data === Tile.DEATH_TILE) {
           ctx.fillStyle = "gray";

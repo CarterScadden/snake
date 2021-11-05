@@ -5,6 +5,7 @@ interface GridItem<T> {
   readonly bottom: GridItem<T> | null;
   readonly column: number;
   readonly row: number;
+  readonly index: number;
   data: T;
 }
 

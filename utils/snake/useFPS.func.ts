@@ -1,7 +1,8 @@
-export default function use60Fps(
+export default function useFPS(
+  fps: number,
   callback: (timestamp: number, frame: number) => void
 ) {
-  const delay = 1000 / 2;
+  const delay = 1000 / fps;
   let previousTimeStamp: number | null = null;
   let frame = -1;
   let paused = false;
